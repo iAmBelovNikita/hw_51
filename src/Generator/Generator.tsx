@@ -1,20 +1,18 @@
-import './Person.css';
+import './Generator.css';
 import type {FC, PropsWithChildren} from 'react';
 
 interface Props extends PropsWithChildren {
-    name: string;
-    age: number;
+    valueNumber: number;
 }
 
-const Person:FC<Props> = (props) => {
+const Generator:FC<Props> = (props) => {
 
     return (
-        <div className="person">
-            <h1>{props.name}</h1>
-            <p>Age: {props.age}</p>
-            <p>{props.children}</p>
+        <div className="loteryBall">
+            <h1>{props.valueNumber}</h1>
         </div>
     )
+
 };
 
-export default Person;
+export default Generator;

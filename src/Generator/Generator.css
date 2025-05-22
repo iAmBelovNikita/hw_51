@@ -1,9 +1,9 @@
-.person {
+.loteryBall {
     display: inline-block;
     border: 1px solid black;
-    margin: 10px;
-    padding: 10px;
     box-shadow: 0 2px 5px #ccc;
-    width: 200px;
-    border-radius: 5px;
+    margin: 10px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
 }

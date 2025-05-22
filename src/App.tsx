@@ -1,35 +1,65 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import Generator from "./Generator/Generator.tsx";
+import {useState} from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+
+const numberGenerator = () => {
+  const numberArray:number[] = [];
+
+  while (numberArray.length !== 5) {
+    const currentNumber = Math.floor(Math.random() * 32) + 5;
+
+    if (numberArray.includes(currentNumber)) {
+      continue;
+    }
+
+    const isLargeNumber = numberArray.findIndex((element) => element > currentNumber);
+    if (isLargeNumber === -1) {
+      numberArray.push(currentNumber);
+    } else {
+      numberArray.splice(isLargeNumber, 0, currentNumber);
+    }
+  }
+
+  return numberArray;
+};
+
+const App = () => {
+  const [defaultNumber, setDefaultNumber] = useState([
+    {number: 5},
+    {number: 11},
+    {number: 16},
+    {number: 23},
+    {number: 32}
+  ]);
+
+
+  const changeNumbers = () => {
+
+    const newNumbers:number[] = numberGenerator();
+
+    setDefaultNumber([
+      {number: newNumbers[0]},
+      {number: newNumbers[1]},
+      {number: newNumbers[2]},
+      {number: newNumbers[3]},
+      {number: newNumbers[4]}
+    ])
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <>
+        <button onClick={changeNumbers} type="button">Randomise !</button>
 
-export default App
+        <div>
+        <Generator valueNumber={defaultNumber[0].number}/>
+        <Generator valueNumber={defaultNumber[1].number}/>
+        <Generator valueNumber={defaultNumber[2].number}/>
+        <Generator valueNumber={defaultNumber[3].number}/>
+        <Generator valueNumber={defaultNumber[4].number}/>
+        </div>
+      </>
+  )
+};
+
+export default App;
